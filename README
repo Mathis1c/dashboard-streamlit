@@ -1,1 +1,10 @@
-Ce repository sert 
+Ce repository sert gerer le dashboard streamlit pour le projet systeme embarque et industrie4.0
+La raison pour laquel cette partie ne se trouve pas dans le github du projet c'est parce que streamlit cloud à besoin d'avoir acces donc repository publique et non privé
+
+Dans ce dashboard sera affiche :
+    mode : Manu ou Auto 
+    iconne montrant la valeur du moteur actuellement 
+    iconne montrant la valeur du servo moteur actuellement 
+    
+
+lien vers le dashboard https://dashboard-appgit-mghzneagrgna7xtkfsu4sh.streamlit.app/
