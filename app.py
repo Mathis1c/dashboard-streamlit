@@ -82,7 +82,7 @@ if st.button("changement mode"):
     if send_topic == "esp/Manu_Auto_mode" :
         client.publish(send_topic, str(send_payload))  # envoie True/False
         st.success(f"Message envoyé sur {send_topic}: {send_payload} ({mode_choice})")
-        print(f"📤 MESSAGE ENVOYÉ: {send_topic} -> {send_payload} ({mode_choice})")
+        print(f" MESSAGE ENVOYÉ: {send_topic} -> {send_payload} ({mode_choice})")
 print("Mode actuel :", st.session_state.mode)
 if st.session_state.mode == "True":#manu
     st.write("Mode manuel sélectionné")
@@ -93,7 +93,7 @@ if st.session_state.mode == "True":#manu
     if send_topic == "esp/moteur":
         send_payload = st.number_input("Valeur moteur (0-100)", min_value=0, max_value=100, value=0, step=10)
     elif send_topic == "esp/servo":
-        send_payload = st.number_input("Valeur servo (0-90)", min_value=0, max_value=90, value=0, step=10)
+        send_payload = st.number_input("Valeur servo (0-180)", min_value=0, max_value=180, value=0, step=10)
 
     if st.button("Envoyer l'odre manuellement"):
         if send_topic in ["esp/moteur", "esp/servo"]:
