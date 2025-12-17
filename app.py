@@ -67,7 +67,7 @@ while not queue.empty():
 # =======================
 # AFFICHAGE FINAL
 # =======================
-st.title("Projet Industrie 4.0 système embarque - Dashboard Streamlit")
+st.title("Projet Industrie 4.0 systèmes embarqués II - Dashboard Streamlit")
 
 st.write("HEURE :", time.strftime("%H:%M:%S"))
 st.write("Moteur :", st.session_state.motor,"______Servo  :", st.session_state.servo,"______Mode   :", st.session_state.mode)
