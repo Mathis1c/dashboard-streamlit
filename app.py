@@ -84,7 +84,7 @@ if st.button("changement mode"):
         st.success(f"Message envoyé sur {send_topic}: {send_payload} ({mode_choice})")
         print(f" MESSAGE ENVOYÉ: {send_topic} -> {send_payload} ({mode_choice})")
 print("Mode actuel :", st.session_state.mode)
-if st.session_state.mode == "True":#manu
+if st.session_state.mode == "1":#manu
     st.write("Mode manuel sélectionné")
     st.subheader("Envoyer un message MQTT")
     
@@ -106,7 +106,7 @@ if st.session_state.mode == "True":#manu
             print(f"📤 MESSAGE ENVOYÉ: {send_topic} -> {send_payload} ({mode_choice})")
         else:
             st.warning("⚠️ Entrez un message avant d'envoyer")
-elif st.session_state.mode == "False": #auto
+elif st.session_state.mode == "0": #auto
     st.write("Mode automatique sélectionné")
     
 
