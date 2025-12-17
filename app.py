@@ -77,7 +77,7 @@ st.write("")
 st.write("Mode : manu ou auto") 
 mode_choice = st.selectbox("Mode", ["manu", "auto"])
 send_topic = "esp/Manu_Auto_mode"
-send_payload = "0" if mode_choice == "auto" else "1" 
+send_payload = "1" if mode_choice == "auto" else "0" 
 if st.button("changement mode"):
     if send_topic == "esp/Manu_Auto_mode" :
         client.publish(send_topic, str(send_payload))  # envoie True/False
