@@ -14,18 +14,17 @@ TOPICS = [
     ("esp/servo", 0),
 ]
 
-# =======================
+
 # RESSOURCE PERSISTANTE
-# =======================
 @st.cache_resource
 def mqtt_resource():
     q = Queue()
 
     def on_connect(client, userdata, flags, rc):
-        print("✅ CONNECT MQTT rc =", rc)
+        print("CONNECT MQTT rc =", rc)
         for topic, _ in TOPICS:
             client.subscribe(topic)
-            print("📡 SUB", topic)
+            print("SUB", topic)
 
     def on_message(client, userdata, msg):
         payload = msg.payload.decode()
@@ -48,12 +47,7 @@ for key in ["motor", "servo", "mode"]:
     if key not in st.session_state:
         st.session_state[key] = "—"
 
-
-
-
-# =======================
 # LECTURE QUEUE
-# =======================
 while not queue.empty():
     topic, payload = queue.get()
 
@@ -64,27 +58,24 @@ while not queue.empty():
     elif topic == "esp/Manu_Auto_mode":
         st.session_state.mode = payload
 
-# =======================
 # AFFICHAGE FINAL
-# =======================
-st.title("Projet Industrie 4.0 systèmes embarqués II - Dashboard Streamlit")
+st.title("Projet Industrie 4.0 système embarque - Dashboard Streamlit")
 
-st.write("HEURE :", time.strftime("%H:%M:%S"))
+st.write("Heure:", time.strftime("%H:%M:%S"))
 st.write("Moteur :", st.session_state.motor,"______Servo  :", st.session_state.servo,"______Mode   :", st.session_state.mode)
-
 
 st.write("")
 st.write("Mode : manu ou auto") 
 mode_choice = st.selectbox("Mode", ["manu", "auto"])
 send_topic = "esp/Manu_Auto_mode"
-send_payload = "1" if mode_choice == "auto" else "0" 
+send_payload = False if mode_choice == "auto" else True 
 if st.button("changement mode"):
     if send_topic == "esp/Manu_Auto_mode" :
         client.publish(send_topic, str(send_payload))  # envoie True/False
         st.success(f"Message envoyé sur {send_topic}: {send_payload} ({mode_choice})")
         print(f" MESSAGE ENVOYÉ: {send_topic} -> {send_payload} ({mode_choice})")
 print("Mode actuel :", st.session_state.mode)
-if st.session_state.mode == "0":#manu
+if st.session_state.mode == "True":#manu
     st.write("Mode manuel sélectionné")
     st.subheader("Envoyer un message MQTT")
     
@@ -99,14 +90,14 @@ if st.session_state.mode == "0":#manu
         if send_topic in ["esp/moteur", "esp/servo"]:
             client.publish(send_topic, str(send_payload))
             st.success(f"Message envoyé sur {send_topic}: {send_payload}")
-            print(f"📤 MESSAGE ENVOYÉ: {send_topic} -> {send_payload}")
+            print(f"MESSAGE ENVOYÉ: {send_topic} -> {send_payload}")
         elif send_topic == "esp/Manu_Auto_mode":
             client.publish(send_topic, str(send_payload))  # envoie True/False
             st.success(f"Message envoyé sur {send_topic}: {send_payload} ({mode_choice})")
-            print(f"📤 MESSAGE ENVOYÉ: {send_topic} -> {send_payload} ({mode_choice})")
+            print(f"MESSAGE ENVOYÉ: {send_topic} -> {send_payload} ({mode_choice})")
         else:
-            st.warning("⚠️ Entrez un message avant d'envoyer")
-elif st.session_state.mode == "1": #auto
+            st.warning("entrez un message avant d'envoyer")
+elif st.session_state.mode == "False": #auto
     st.write("Mode automatique sélectionné")
     
 
