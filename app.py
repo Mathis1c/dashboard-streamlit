@@ -62,7 +62,10 @@ while not queue.empty():
 st.title("Projet Industrie 4.0 systèmes embarqués - Dashboard Streamlit")
 
 st.write("Heure:", time.strftime("%H:%M:%S"))
-affichage_mode = "Auto"  if st.session_state.mode == ("True" or "1") else "Manu"
+
+affichage_mode = "Auto"  if st.session_state.mode in ["True","1"] else "Manu"
+print("st.session_state.mode",st.session_state.mode)
+print("affichage_mode",affichage_mode)
 st.write("Moteur :", st.session_state.motor,"______Servo  :", st.session_state.servo,"______Mode   :", affichage_mode)
 
 st.write("")
@@ -76,7 +79,7 @@ if st.button("changement mode"):
         st.success(f"Message envoyé sur {send_topic}: {send_payload} ({mode_choice})")
         print(f" MESSAGE ENVOYÉ: {send_topic} -> {send_payload} ({mode_choice})")
 print("Mode actuel :", st.session_state.mode)
-if st.session_state.mode == "False":#manu
+if st.session_state.mode in ["False","0"]:#manu
     st.write("Mode manuel sélectionné")
     st.subheader("Envoyer un message MQTT")
     
