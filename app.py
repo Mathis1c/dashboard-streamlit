@@ -62,7 +62,8 @@ while not queue.empty():
 st.title("Projet Industrie 4.0 systèmes embarqués - Dashboard Streamlit")
 
 st.write("Heure:", time.strftime("%H:%M:%S"))
-st.write("Moteur :", st.session_state.motor,"______Servo  :", st.session_state.servo,"______Mode   :", st.session_state.mode)
+affichage_mode = True  if st.session_state.mode == ("True" or "1") else False
+st.write("Moteur :", st.session_state.motor,"______Servo  :", st.session_state.servo,"______Mode   :", affichage_mode)
 
 st.write("")
 st.write("Mode : manu ou auto") 
